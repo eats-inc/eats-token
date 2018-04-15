@@ -1,4 +1,4 @@
 ## EATS ERC20 Token
   + Name: ``` EATS Token```
   + Symbol: ``` EATS ```
-  + Decimals: ``` 18 ```
+  + Decimals: ``` 8 ```

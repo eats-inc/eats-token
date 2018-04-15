@@ -9,7 +9,7 @@ contract Eats is Ownable, ERC20 {
 
   string public constant name = "EATS Token";
   string public constant symbol = "EATS";
-  uint8 public constant decimals = 18;
+  uint8 public constant decimals = 8;
 
   mapping(address => uint256) balances;
 
