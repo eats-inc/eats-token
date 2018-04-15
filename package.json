@@ -1,0 +1,19 @@
+{
+  "name": "eats-token",
+  "version": "1.0.0",
+  "description": "EATS ERC20 Token",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "eats",
+    "liv",
+    "erc20"
+  ],
+  "author": "Fodé Diop",
+  "license": "MIT"
+}
