@@ -24,7 +24,7 @@ contract Eats is Ownable, ERC20 {
   event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
   event OwnershipTransferred(address indexed from, address indexed to);
 
-  function Eats() {
+  function Eats() public {
     INITIAL_SUPPLY = 100000000000000000;
     balances[msg.sender] = INITIAL_SUPPLY;
     totalSupply_ = INITIAL_SUPPLY;
@@ -33,7 +33,7 @@ contract Eats is Ownable, ERC20 {
     emit Transfer(address(0), owner, totalSupply_);
   }
 
-  function totalSupply() public view returns (bool success) {
+  function totalSupply() public view returns (uint256) {
     return totalSupply_;
   }
 
@@ -51,7 +51,7 @@ contract Eats is Ownable, ERC20 {
     return true;
   }
 
-  function transfer(address from, uint tokens) public returns (bool success) {
+  function transfer(address to, uint tokens) public returns (bool success) {
     balances[msg.sender] = balances[msg.sender].sub(tokens);
     balances[to] = balances[to].add(tokens);
     emit Transfer(msg.sender, to, tokens);
