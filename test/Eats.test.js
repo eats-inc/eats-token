@@ -17,10 +17,6 @@ let acct_two = null
 let starting_balance_two = null
 let ending_balance_two = null
 let acct_three = null
-let balance1 = null
-let balance2 = null
-let balance3 = null
-let balance4 = null
 
 contract('EATS ERC20 Token', async (accounts) => {
 
@@ -49,8 +45,7 @@ contract('EATS ERC20 Token', async (accounts) => {
   })
 
   it('should have 8 decimal places', async () => {
-    const getDecimals = await eats.decimals.call()
-    decimals = getDecimals.toNumber()
+    const decimals = (await eats.decimals.call()).toNumber()
     expect(decimals.valueOf()).to.equal(8)
   })
 
@@ -73,23 +68,16 @@ contract('EATS ERC20 Token', async (accounts) => {
     acct_two = accounts[1]
     amount = 100
 
-    starting_balance_one = await eats.balanceOf(acct_one)
-    starting_balance_two = await eats.balanceOf(acct_two)
-
-    balance1 = starting_balance_one.toNumber()
-    balance2 = starting_balance_two.toNumber()
+    starting_balance_one = (await eats.balanceOf(acct_one)).toNumber()
+    starting_balance_two = (await eats.balanceOf(acct_two)).toNumber()
 
     transfer_event = await eats.transfer(acct_two, amount, {from: acct_one})
 
-    ending_balance_one = await eats.balanceOf(acct_one)
-    ending_balance_two = await eats.balanceOf(acct_two)
+    ending_balance_one = (await eats.balanceOf(acct_one)).toNumber()
+    ending_balance_two = (await eats.balanceOf(acct_two)).toNumber()
 
-    balance3 = ending_balance_one.toNumber()
-    balance4 = ending_balance_two.toNumber()
-
-    expect(balance3).to.equal(balance1 - 100)
-    expect(balance4).to.equal(balance2 + 100)
-
+    expect(ending_balance_one).to.equal(starting_balance_one - 100)
+    expect(ending_balance_two).to.equal(starting_balance_two + 100)
   })
 
   it('should not be possible to transfer more tokens than you have', async () => {
