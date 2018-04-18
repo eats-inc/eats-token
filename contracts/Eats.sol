@@ -48,14 +48,16 @@ contract Eats is Ownable, ERC20 {
   function approve(address spender, uint tokens) public returns (bool success) {
     allowed[msg.sender][spender] = tokens;
     emit Approval(msg.sender, spender, tokens);
-    return true;
+    success = true;
   }
 
   function transfer(address to, uint tokens) public returns (bool success) {
+    require(to != address(0));
+    require(tokens <= balances[msg.sender]);
     balances[msg.sender] = balances[msg.sender].sub(tokens);
     balances[to] = balances[to].add(tokens);
     emit Transfer(msg.sender, to, tokens);
-    return true;
+    success = true;
   }
 
   function transferFrom(address from, address to, uint tokens) public returns (bool success) {
@@ -63,7 +65,7 @@ contract Eats is Ownable, ERC20 {
     allowed[from][msg.sender] = allowed[from][msg.sender].sub(tokens);
     balances[to] = balances[to].add(tokens);
     emit Transfer(from, to, tokens);
-    return true;
+    success = true;
   }
 
   function setOwner(address newOwner) public onlyOwner {
