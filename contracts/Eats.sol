@@ -75,8 +75,9 @@ contract Eats is Ownable, StandardToken {
 
   function setOwner(address newOwner) public onlyOwner {
     require(newOwner != address(0));
+
     owner = newOwner;
-    OwnershipTransferred(owner, newOwner);
+    emit OwnershipTransferred(owner, newOwner);
   }
 
   function () public payable {
