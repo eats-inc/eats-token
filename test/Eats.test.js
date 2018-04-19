@@ -27,8 +27,8 @@ contract('EATS ERC20 Token', async (accounts) => {
   it('should fail because the function doest not exist in Contract', async () => {
     try {
       await eats.nonExistentFunction()
-    } catch (err) {
-      expect(err.name).to.equal('TypeError')
+    } catch (error) {
+      expect(error.name).to.equal('TypeError')
       return true
     }
     throw new Error('I should never see this!')

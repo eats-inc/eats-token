@@ -1,5 +1,5 @@
 function toEther(n) {
-  return web3.toWei(n, "ether")
+  return web3.toWei(n, 'ether')
 }
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
       assert.fail('Expected revert not received')
     } catch (error) {
       const revertFound = error.message.search('revert') >= 0
-      assert(revertFound, `Expected "revert", got ${error} instead`)
+      assert(revertFound, `Expected 'revert', got ${error} instead`)
     }
   },
 
