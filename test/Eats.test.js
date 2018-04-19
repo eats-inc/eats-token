@@ -34,6 +34,12 @@ contract('EATS ERC20 Token', async (accounts) => {
     throw new Error('I should never see this!')
   })
 
+  it('should test that the contract is owned by the correct address', async () => {
+    owner = await eats.owner.call()
+    console.log('Contract owner --> ', owner)
+    expect(owner.valueOf()).to.equal('0x50Ebe9ad50DCf1Be1A35570E29587fa9F6eCDB46')
+  })
+
   it('should initialize with the name EATS Token', async () => {
     const name = await eats.name.call()
     expect(name.valueOf()).to.equal('EATS Token')
@@ -90,7 +96,7 @@ contract('EATS ERC20 Token', async (accounts) => {
 
   it('should not allow a non-owner transfer of ownership', async () => {
     acct_two = accounts[1]
-    await utils.assertRevert(eats.setOwner(acct_two, {from: acct_two}))
+    await utils.assertRevert(eats.transferOwnership(acct_two, {from: acct_two}))
   })
 
 })

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.22;
+pragma solidity ^0.4.21;
 
 import "zeppelin-solidity/contracts/math/SafeMath.sol";
 import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
@@ -18,8 +18,6 @@ contract Eats is Ownable, StandardToken {
   uint internal totalSupply_;
   uint public INITIAL_SUPPLY;
 
-  address public owner;
-
   event Transfer(address indexed from, address indexed to, uint tokens);
   event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
   event OwnershipTransferred(address indexed from, address indexed to);
@@ -29,7 +27,6 @@ contract Eats is Ownable, StandardToken {
     balances[msg.sender] = INITIAL_SUPPLY;
     totalSupply_ = INITIAL_SUPPLY;
 
-    owner = msg.sender;
     emit Transfer(address(0), owner, totalSupply_);
   }
 
@@ -63,7 +60,7 @@ contract Eats is Ownable, StandardToken {
 
   function transferFrom(address from, address to, uint tokens) public returns (bool success) {
     require(to != address(0));
-    require(tokens <= balances[msg.sender]);
+    require(tokens <= balances[from]);
     require(tokens <= allowed[from][msg.sender]);
 
     balances[from] = balances[from].sub(tokens);
@@ -71,13 +68,6 @@ contract Eats is Ownable, StandardToken {
     balances[to] = balances[to].add(tokens);
     emit Transfer(from, to, tokens);
     success = true;
-  }
-
-  function setOwner(address newOwner) public onlyOwner {
-    require(newOwner != address(0));
-
-    owner = newOwner;
-    emit OwnershipTransferred(owner, newOwner);
   }
 
   function () public payable {
