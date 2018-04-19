@@ -4,6 +4,7 @@ const utils = require('./utils')
 const BigNumber = web3.BigNumber
 
 const TOTAL_SUPPLY = 100000000000000000
+const ADDRESS = '0x50Ebe9ad50DCf1Be1A35570E29587fa9F6eCDB46'
 
 let eats = null
 let accounts = null
@@ -37,7 +38,11 @@ contract('EATS ERC20 Token', async (accounts) => {
   it('should test that the contract is owned by the correct address', async () => {
     owner = await eats.owner.call()
     console.log('Contract owner --> ', owner)
-    expect(owner.valueOf()).to.equal('0x50Ebe9ad50DCf1Be1A35570E29587fa9F6eCDB46')
+    expect(owner.valueOf()).to.equal(ADDRESS)
+  })
+
+  it('should test that the contract is deployed by the correct address', async () => {
+
   })
 
   it('should initialize with the name EATS Token', async () => {
@@ -72,7 +77,7 @@ contract('EATS ERC20 Token', async (accounts) => {
   it('should correctly transfer EATS tokens', async () => {
     acct_one = accounts[0]
     acct_two = accounts[1]
-    amount = 100
+    amount = 1000
 
     starting_balance_one = (await eats.balanceOf(acct_one)).toNumber()
     starting_balance_two = (await eats.balanceOf(acct_two)).toNumber()
@@ -82,8 +87,8 @@ contract('EATS ERC20 Token', async (accounts) => {
     ending_balance_one = (await eats.balanceOf(acct_one)).toNumber()
     ending_balance_two = (await eats.balanceOf(acct_two)).toNumber()
 
-    expect(ending_balance_one).to.equal(starting_balance_one - 100)
-    expect(ending_balance_two).to.equal(starting_balance_two + 100)
+    expect(ending_balance_one).to.equal(starting_balance_one - amount)
+    expect(ending_balance_two).to.equal(starting_balance_two + amount)
   })
 
   it('should not be possible to transfer more tokens than you have', async () => {
