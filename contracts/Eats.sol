@@ -1,4 +1,4 @@
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.22;
 
 import "zeppelin-solidity/contracts/math/SafeMath.sol";
 import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
@@ -24,7 +24,7 @@ contract Eats is Ownable, StandardToken {
   event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
   event OwnershipTransferred(address indexed from, address indexed to);
 
-  function Eats() public {
+  function constructor() public {
     INITIAL_SUPPLY = 100000000000000000;
     balances[msg.sender] = INITIAL_SUPPLY;
     totalSupply_ = INITIAL_SUPPLY;
